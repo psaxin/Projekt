@@ -1,0 +1,56 @@
+
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author joaki_000
+ */
+public class ValidateInput {
+    
+     static public boolean valideraText(String text) {
+         boolean ok = false;
+         if (text.isEmpty()){
+             MainGUI.setErrorText( "FUNKA EJ");
+        }
+        else{
+           ok = true;
+        }   
+         return ok;
+    }
+
+    static public boolean valideraSiffror(String valSiff) {
+        boolean kollaSiffror = valSiff.matches("^[\\d]+$");
+        return kollaSiffror;
+    }
+
+   
+    static public boolean valideraBokstaver(String valBoks) {
+        boolean kollaBokstaver = valBoks.matches("^[a-zA-Z]+$");
+        return kollaBokstaver;
+    }
+
+   
+    static public boolean valideraMail(String valMail) {
+        boolean kollaMail = valMail.matches("^[\\w.+-]+@[A-Za-z0-9-]+\\.[A-Za-z0-9-.]*[A-Za-z]{2,}$");
+        if (kollaMail) {
+            kollaMail = !valMail.matches("(\\.\\.)");
+        }
+        return kollaMail;
+    }
+
+    
+    static public boolean valideraTelefon(String valTelefon) {
+        boolean kollaTelefon = valTelefon.matches("^([\\d- ]+)$");
+        return kollaTelefon;
+    }
+    
+    
+}
