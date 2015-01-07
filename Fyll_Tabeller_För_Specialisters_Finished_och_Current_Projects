@@ -1,1 +1,79 @@
-gfh
+    
+    
+    
+    //två metoder, en för varje tabell. En tabell håller Pågående projekt och en håller Avslutade Projekt.
+    //call methods i private void cbSpecialistPopupMenuWillBecomeInvisible...
+    
+    private void fyllFinishedProjectsTable()
+    {
+        int temp = 0; // avgörande variabel för IF-sats längst ner i metoden
+        // "tableFinishedProjects" är namnet på tabellen
+        DefaultTableModel model = (DefaultTableModel) tableFinishedProjects.getModel();
+        ArrayList<HashMap<String, String>> specialister = null;
+        model.setRowCount(0); // nollställer tabellen
+        String markerad = cbSpecialist.getSelectedItem().toString(); //den markerade specialisten i cmb
+        
+        String sqlFragaCurrentProjects = "Select BETECKNING,SPELPROJEKT.RELEASEDATUM,ANSTALLD.NAMN from SPELPROJEKT\n" +
+        "join ANSTALLD on SPELPROJEKT.AID = ANSTALLD.AID\n" +
+        "where RELEASEDATUM < current_date";
+         try {
+            specialister = idb.fetchRows(sqlFragaCurrentProjects);
+            System.out.println("funka");
+       
+        }
+        catch (InfException e)
+        {JOptionPane.showMessageDialog(null, e.getMessage());
+        System.out.println("Fel");
+        }
+
+              for (int i =0; i<specialister.size();i++)
+                {
+                    
+                     if(specialister.get(i).get("NAMN").equals(markerad))
+                     {
+                         temp++; //ändrar den avgörande variabeln
+                     model.addRow(new Object[]{specialister.get(i).get("BETECKNING"),specialister.get(i).get("RELEASEDATUM")});
+                     
+                     }
+                }
+                //fyller tabellen med String om inte specialisten finns
+              if(temp <1)
+              {
+                  model.addRow(new Object[]{"Inga Slutförda"});
+              }
+          
+
+    }
+    
+    private void fyllCurrentProjectsTable()
+    {
+        int temp = 0;
+        DefaultTableModel model = (DefaultTableModel) tableCurrentProjects.getModel();
+        ArrayList<HashMap<String, String>> specialister = null;
+        model.setRowCount(0);
+        String markerad = cbSpecialist.getSelectedItem().toString();
+        String sqlFragaCurrentProjects = "Select BETECKNING,SPELPROJEKT.RELEASEDATUM,ANSTALLD.NAMN from SPELPROJEKT\n" +
+        "join ANSTALLD on SPELPROJEKT.AID = ANSTALLD.AID\n" +
+        "where RELEASEDATUM > current_date";
+         try {
+            specialister = idb.fetchRows(sqlFragaCurrentProjects);
+            System.out.println("funka");
+       
+        }
+        catch (InfException e)
+        {JOptionPane.showMessageDialog(null, e.getMessage());
+        System.out.println("Fel");
+        }
+              for (int i =0; i<specialister.size();i++)
+                {
+                     if(specialister.get(i).get("NAMN").equals(markerad))
+                     {
+                        temp++;
+                        model.addRow(new Object[]{specialister.get(i).get("BETECKNING"),specialister.get(i).get("RELEASEDATUM")});
+                     }
+                }
+              if(temp <1)
+              {
+                  model.addRow(new Object[]{"Inga Pågående"});
+              }
+    }
