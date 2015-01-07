@@ -13,7 +13,7 @@
         model.setRowCount(0); // nollställer tabellen
         String markerad = cbSpecialist.getSelectedItem().toString(); //den markerade specialisten i cmb
         
-        String sqlFragaCurrentProjects = "Select BETECKNING,SPELPROJEKT.RELEASEDATUM,ANSTALLD.NAMN from SPELPROJEKT\n" +
+        String sqlFragaFinishedProjects = "Select BETECKNING,SPELPROJEKT.RELEASEDATUM,ANSTALLD.NAMN from SPELPROJEKT\n" +
         "join ANSTALLD on SPELPROJEKT.AID = ANSTALLD.AID\n" +
         "where RELEASEDATUM < current_date";
          try {
