@@ -17,7 +17,7 @@ public class testForm extends   javax.swing.JFrame{
 
    private InfDB idb;
     
-   final MainGUI hej = new MainGUI();
+   final MainGUI mainGui = new MainGUI();
    
     public testForm() {
    
@@ -27,7 +27,7 @@ public class testForm extends   javax.swing.JFrame{
           {
 
     try{
-         idb = new InfDB("C:\\Users\\Simon\\Desktop\\MICEDB.FDB");
+         idb = new InfDB("C:\\Users\\joaki_000\\Desktop\\MICEDB.FDB");
         System.out.println("Det funkade");
         }
         catch(InfException e){
@@ -86,24 +86,10 @@ public class testForm extends   javax.swing.JFrame{
     }// </editor-fold>                        
 
     private void btnLogginActionPerformed(java.awt.event.ActionEvent evt) {                                          
-     pbLaddning.setValue(0);
-     hej.fyllCbProjekledare();
-     pbLaddning.setValue(25);
-     hej.fyllCbProjekt();
-     pbLaddning.setValue(50);
-     hej.fyllAnstalld();
-     hej.fyllCBSpecialist();
-     pbLaddning.setValue(75);
-     hej.fyllPlattform();
-     hej.fyllDoman();
-     pbLaddning.setValue(100);
-   //  hej.fyllListProj();
-                
-        
-        hej.setVisible(true);
+     
+    
+        mainGui.setVisible(true);
         dispose();
-        
-        
         
     }                                         
 
@@ -147,4 +133,3 @@ public class testForm extends   javax.swing.JFrame{
     private javax.swing.JProgressBar pbLaddning;
     // End of variables declaration                   
 }
-
